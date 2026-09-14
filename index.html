@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reikage — Official Leaderboard</title>
+  <meta name="description" content="Official leaderboard of the Reikage clan." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <main class="page">
+
+    <header class="hero">
+      <div class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="34" height="34">
+          <path d="M24 2 L44 24 L24 46 L4 24 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M24 14 L34 24 L24 34 L14 24 Z" fill="currentColor" opacity="0.9"/>
+        </svg>
+      </div>
+      <h1 class="title">Reikage</h1>
+      <p class="subtitle">Official Leaderboard</p>
+    </header>
+
+    <section class="board" id="boardSection" aria-live="polite" aria-busy="true">
+
+      <!-- Loading state: shown while the API request is in flight -->
+      <div class="state state-loading" id="loadingState">
+        <div class="skeleton-podium">
+          <div class="skeleton-card small"></div>
+          <div class="skeleton-card large"></div>
+          <div class="skeleton-card small"></div>
+        </div>
+        <div class="skeleton-list">
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+          <div class="skeleton-row"></div>
+        </div>
+      </div>
+
+      <!-- Error state: shown if the fetch fails, instead of a broken page -->
+      <div class="state state-error" id="errorState" hidden>
+        <p class="error-title">The leaderboard couldn't be loaded.</p>
+        <p class="error-detail" id="errorDetail">Check your connection and try again.</p>
+        <button class="retry-btn" id="retryBtn" type="button">Try again</button>
+      </div>
+
+      <!-- Real content: built entirely from fetched data, never hardcoded -->
+      <div class="board-content" id="boardContent" hidden>
+        <div class="podium" id="podium"></div>
+        <ol class="rest-list" id="restList"></ol>
+      </div>
+
+    </section>
+
+    <footer class="meta">
+      <span class="meta-dot" aria-hidden="true"></span>
+      <span id="lastUpdated">Loading…</span>
+    </footer>
+
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
