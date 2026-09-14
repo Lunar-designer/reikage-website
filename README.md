@@ -43,81 +43,40 @@ reikage-website/
 
 ## 3. How to run/test it locally
 
-Because the page uses `fetch()`, opening `index.html` directly by
-double-clicking it will be blocked by the browser in some cases. Instead,
-serve the folder with a tiny local server:
+Because the page uses `fetch()`, opening `index.html` directly by double-clicking it will be blocked by the browser in some cases. Instead, serve the folder with a tiny local server:
 
-**If you have Python installed:**
+**If you have Node.js installed:**
+```sh
+npx serve
 ```
-cd reikage-website
+and open the local URL printed in the terminal (usually `http://localhost:3000`).
+
+**If you have Python installed instead:**
+```sh
 python3 -m http.server 8000
 ```
 Then open `http://localhost:8000` in your browser.
 
-**If you have Node.js installed instead:**
-```
-cd reikage-website
-npx serve
-```
-and open the URL it prints.
+The site is already connected to your live API endpoint on Render (`https://reikage-bot.onrender.com/api/leaderboard`) in `js/config.js`, so it will immediately load your live clan data!
 
-Right now, since `LEADERBOARD_API_URL` is still the placeholder, you'll
-see the clean error state — that's expected and correct. It proves the
-loading/error handling works before you even have a real API.
+## 4. Where the API URL is configured
 
-To see it with real-looking data while testing, you can temporarily set
-in `js/config.js`:
-```js
-const LEADERBOARD_API_URL = "data:application/json,{\"1\":\"Lunar\",\"2\":\"Kestrel\",\"3\":\"Vale\",\"4\":\"Orin\",\"5\":\"\",\"6\":\"Marrow\",\"7\":\"\",\"8\":\"Sable\",\"9\":\"\",\"10\":\"\"}";
-```
-then change it back to `"YOUR_API_URL_HERE"` (or your real URL) when
-you're done — don't leave test data in the file you deploy.
-
-## 4. Where the real API URL goes
-
-Open **`js/config.js`** — it is the very first executable line:
+In **`js/config.js`**:
 
 ```js
-const LEADERBOARD_API_URL = "YOUR_API_URL_HERE";
+const LEADERBOARD_API_URL = "https://reikage-bot.onrender.com/api/leaderboard";
 ```
 
-Replace `"YOUR_API_URL_HERE"` with your bot's real, **publicly reachable**
-API endpoint once it's hosted somewhere with a public URL (not
-`localhost`) — for example:
-
-```js
-const LEADERBOARD_API_URL = "https://reikage-bot.up.railway.app/api/leaderboard";
-```
-
-That's the only code change needed to connect this site to your live
-Discord data. Nothing else in the project needs to be touched, because
-`app.js` already understands both:
-- the flat shape straight from your bot's `leaderboard.json`:
-  `{ "1": "lunar", "2": "", ... }`
-- and the wrapped shape your existing bot's `/api/leaderboard` endpoint
-  currently returns: `{ leaderboard: [...], updatedAt: "..." }`
-
-So whichever one your bot ends up serving publicly, the website will
-work without edits.
-
-**Important:** your bot's API currently only listens on
-`http://localhost:3000`, which only works on your own computer. For the
-live website (especially once it's on GitHub Pages) to reach it, the bot
-needs to be hosted somewhere with a public HTTPS address — for example
-Railway, Render, or a small VPS. That's a separate, later step; it does
-not require changing any bot files, only where the bot process runs.
+The website automatically accepts either:
+- the flat shape straight from your bot's `leaderboard.json`: `{ "1": "lunar", "2": "", ... }`
+- or the wrapped shape your bot endpoint returns: `{ clan: "Reikage", leaderboard: [...], updatedAt: "..." }`
 
 ## 5. Deploying to GitHub Pages
 
-1. Create a new GitHub repository and push the contents of this folder
-   to it (keep `index.html` at the repository root, or in `/docs` if you
-   prefer — just match it in the Pages settings).
-2. In the repo's **Settings → Pages**, set the source to the branch/folder
-   containing `index.html`.
-3. GitHub will give you a URL like `https://yourname.github.io/reikage/`
-   — that's your live site.
-4. Before pushing, make sure `js/config.js` has your real, public API URL
-   (see section 4) — GitHub Pages can't reach `localhost`.
+1. Push the repository to GitHub with `index.html` at the repository root.
+2. In your repo's **Settings → Pages**, ensure the source is set to `Deploy from a branch`, selecting branch `main` and root `/(root)`.
+3. Your live site is available at:
+   `https://lunar-designer.github.io/reikage-website/`
 
 ## Notes on the design
 

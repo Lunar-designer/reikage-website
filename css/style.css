@@ -832,8 +832,7 @@ body {
 
   grid-template-columns:
     68px
-    1fr
-    auto;
+    1fr;
 
   align-items: center;
 
@@ -1254,6 +1253,28 @@ body {
   }
 }
 
+.board-content.animate-in {
+  animation: boardIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes boardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-content.animate-in {
+    animation: none;
+  }
+}
+
 
 /* =========================================================
    TABLET
@@ -1317,8 +1338,7 @@ body {
 
     grid-template-columns:
       50px
-      1fr
-      auto;
+      1fr;
   }
 }
 
