@@ -1,0 +1,1487 @@
+/* =========================================================
+   REIKAGE — HYBRID DESIGN
+   Shadow Anime × Elite Esports × Cosmic
+   ========================================================= */
+
+:root {
+  --bg: #030307;
+  --bg-2: #07060d;
+  --panel: rgba(12, 10, 19, 0.78);
+  --panel-solid: #0e0c15;
+
+  --white: #f7f4ff;
+  --text: #ddd8e8;
+  --muted: #858091;
+  --faint: #4e4a58;
+
+  --purple: #8d5cff;
+  --purple-light: #bd9dff;
+  --purple-dark: #4f2ca3;
+
+  --gold: #d9b86c;
+  --silver: #b7bdca;
+  --bronze: #aa765d;
+
+  --line: rgba(255, 255, 255, 0.075);
+  --line-bright: rgba(255, 255, 255, 0.14);
+
+  --display: "Rajdhani", sans-serif;
+  --body: "Inter", sans-serif;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  color: var(--text);
+  font-family: var(--body);
+
+  background:
+    radial-gradient(
+      ellipse at 50% -15%,
+      rgba(118, 65, 220, 0.22),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 0% 70%,
+      rgba(71, 38, 135, 0.10),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 100% 35%,
+      rgba(99, 47, 190, 0.08),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #040308 0%,
+      #07060b 48%,
+      #030307 100%
+    );
+
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   COSMIC ATMOSPHERE
+   ========================================================= */
+
+.atmosphere {
+  position: fixed;
+  inset: 0;
+
+  z-index: 0;
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+
+/* giant moon */
+
+.atmosphere::before {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  top: -285px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 42% 38%,
+      rgba(255, 255, 255, 0.075),
+      rgba(150, 110, 255, 0.055) 28%,
+      rgba(76, 43, 150, 0.025) 52%,
+      transparent 70%
+    );
+
+  box-shadow:
+    0 0 100px rgba(120, 72, 240, 0.10),
+    0 0 220px rgba(94, 48, 190, 0.07);
+
+  animation: moonFloat 9s ease-in-out infinite;
+}
+
+
+/* stars + cosmic grid */
+
+.atmosphere::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.55;
+
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.28) 1px, transparent 1px),
+    radial-gradient(circle, rgba(170,130,255,0.22) 1px, transparent 1px),
+    linear-gradient(
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    115px 115px,
+    173px 173px,
+    80px 80px,
+    80px 80px;
+
+  background-position:
+    15px 30px,
+    70px 90px,
+    0 0,
+    0 0;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      black 48%,
+      transparent 92%
+    );
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.page {
+  position: relative;
+  z-index: 1;
+
+  width: min(980px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding:
+    88px
+    0
+    60px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  position: relative;
+
+  text-align: center;
+
+  margin-bottom: 54px;
+
+  animation: heroIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* decorative lines */
+
+.hero::before,
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  top: 72px;
+
+  width: 180px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(141, 92, 255, 0.55),
+      transparent
+    );
+}
+
+.hero::before {
+  right: calc(50% + 145px);
+}
+
+.hero::after {
+  left: calc(50% + 145px);
+}
+
+
+/* emblem */
+
+.emblem {
+  position: relative;
+
+  width: 72px;
+  height: 72px;
+
+  margin:
+    0
+    auto
+    24px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--purple-light);
+
+  border:
+    1px solid
+    rgba(141, 92, 255, 0.38);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(141, 92, 255, 0.15),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  clip-path: polygon(
+    50% 0%,
+    91% 23%,
+    91% 77%,
+    50% 100%,
+    9% 77%,
+    9% 23%
+  );
+
+  box-shadow:
+    0 0 35px rgba(141, 92, 255, 0.13),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.emblem::before {
+  content: "";
+
+  position: absolute;
+  inset: 7px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  clip-path: inherit;
+}
+
+.emblem svg {
+  position: relative;
+  z-index: 1;
+
+  width: 38px;
+  height: 38px;
+}
+
+
+/* title */
+
+.title {
+  margin: 0;
+
+  font-family: var(--display);
+
+  font-size:
+    clamp(60px, 10vw, 104px);
+
+  line-height: 0.8;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eee9f8 40%,
+      #9b91a8 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  text-shadow:
+    0 0 50px rgba(255,255,255,0.04);
+}
+
+
+/* subtitle */
+
+.subtitle {
+  margin:
+    22px
+    0
+    0;
+
+  color: var(--muted);
+
+  font-family: var(--display);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.45em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DECORATIVE QUOTE EFFECT
+   ========================================================= */
+
+/*
+   This uses the existing subtitle area visually.
+   No HTML changes required.
+*/
+
+.hero .subtitle::before {
+  content: "“";
+
+  display: inline-block;
+
+  margin-right: 7px;
+
+  color: var(--purple-light);
+
+  font-size: 17px;
+}
+
+.hero .subtitle::after {
+  content: "”";
+
+  display: inline-block;
+
+  margin-left: 7px;
+
+  color: var(--purple-light);
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   BOARD
+   ========================================================= */
+
+.board {
+  position: relative;
+
+  padding: 30px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.09);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.045),
+      rgba(255,255,255,0.008) 45%,
+      rgba(141,92,255,0.025)
+    ),
+    rgba(8, 7, 12, 0.82);
+
+  clip-path: polygon(
+    18px 0,
+    calc(100% - 18px) 0,
+    100% 18px,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    18px 100%,
+    0 calc(100% - 18px),
+    0 18px
+  );
+
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.58),
+    0 0 80px rgba(87,44,174,0.055),
+    0 1px 0 rgba(255,255,255,0.04) inset;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  overflow: hidden;
+}
+
+
+/* board top energy line */
+
+.board::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+  right: 8%;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--purple),
+      var(--purple-light),
+      var(--purple),
+      transparent
+    );
+
+  box-shadow:
+    0 0 18px rgba(141,92,255,0.5);
+
+  animation: energyLine 4s ease-in-out infinite;
+}
+
+
+/* corner decorations */
+
+.board::after {
+  content: "";
+
+  position: absolute;
+
+  top: 18px;
+  left: 18px;
+
+  width: 45px;
+  height: 45px;
+
+  border-top:
+    1px solid
+    rgba(141,92,255,0.5);
+
+  border-left:
+    1px solid
+    rgba(141,92,255,0.5);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   PODIUM
+   ========================================================= */
+
+.podium {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1.15fr
+    1fr;
+
+  align-items: end;
+
+  gap: 16px;
+
+  min-height: 350px;
+
+  padding:
+    28px
+    12px
+    34px;
+}
+
+
+/* central spotlight */
+
+.podium::before {
+  content: "";
+
+  position: absolute;
+
+  width: 480px;
+  height: 240px;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(141,92,255,0.10),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   PODIUM CARD
+   ========================================================= */
+
+.podium-card {
+  position: relative;
+
+  min-height: 245px;
+
+  padding:
+    28px
+    20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.012)
+    ),
+    rgba(12,10,17,0.82);
+
+  clip-path: polygon(
+    12px 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0 calc(100% - 12px),
+    0 12px
+  );
+
+  box-shadow:
+    0 25px 55px rgba(0,0,0,0.38),
+    0 1px 0 rgba(255,255,255,0.04) inset;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* card inner glow */
+
+.podium-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(141,92,255,0.13),
+      transparent 62%
+    );
+
+  pointer-events: none;
+}
+
+
+/* card bottom line */
+
+.podium-card::after {
+  content: "";
+
+  position: absolute;
+
+  left: 18%;
+  right: 18%;
+  bottom: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(141,92,255,0.35),
+      transparent
+    );
+}
+
+
+.podium-card:hover {
+  transform: translateY(-8px);
+
+  border-color:
+    rgba(141,92,255,0.28);
+
+  box-shadow:
+    0 32px 70px rgba(0,0,0,0.5),
+    0 0 45px rgba(141,92,255,0.07);
+}
+
+
+/* =========================================================
+   FIRST PLACE
+   ========================================================= */
+
+.podium-card.rank-1 {
+  min-height: 315px;
+
+  border-color:
+    rgba(141,92,255,0.48);
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(141,92,255,0.20),
+      transparent 58%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(141,92,255,0.10),
+      rgba(255,255,255,0.02)
+    ),
+    rgba(14,11,23,0.94);
+
+  box-shadow:
+    0 35px 85px rgba(0,0,0,0.58),
+    0 0 70px rgba(141,92,255,0.12),
+    0 1px 0 rgba(255,255,255,0.08) inset;
+
+  transform: translateY(-15px);
+}
+
+
+.podium-card.rank-1:hover {
+  transform: translateY(-22px);
+
+  box-shadow:
+    0 42px 90px rgba(0,0,0,0.62),
+    0 0 90px rgba(141,92,255,0.17);
+}
+
+
+/* crown-like top accent */
+
+.podium-card.rank-1::before {
+  background:
+    radial-gradient(
+      ellipse at 50% -5%,
+      rgba(190,157,255,0.24),
+      transparent 58%
+    );
+}
+
+
+/* =========================================================
+   PODIUM RANK
+   ========================================================= */
+
+.podium-rank {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 21px;
+
+  font-family: var(--display);
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.28em;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+.rank-1 .podium-rank {
+  color: var(--gold);
+
+  text-shadow:
+    0 0 20px rgba(217,184,108,0.22);
+}
+
+.rank-2 .podium-rank {
+  color: var(--silver);
+}
+
+.rank-3 .podium-rank {
+  color: var(--bronze);
+}
+
+
+/* =========================================================
+   PODIUM NAME
+   ========================================================= */
+
+.podium-name {
+  position: relative;
+  z-index: 1;
+
+  max-width: 100%;
+
+  font-family: var(--display);
+
+  font-size:
+    clamp(22px, 3vw, 31px);
+
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.rank-1 .podium-name {
+  font-size:
+    clamp(28px, 4vw, 40px);
+
+  color: var(--white);
+
+  text-shadow:
+    0 0 35px rgba(189,157,255,0.22);
+}
+
+
+/* =========================================================
+   PODIUM VACANT
+   ========================================================= */
+
+.podium-card.is-vacant {
+  opacity: 0.38;
+}
+
+.podium-card.is-vacant .podium-name {
+  color: var(--faint);
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   REST LIST
+   ========================================================= */
+
+.rest-list {
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+/* =========================================================
+   RANKING ROW
+   ========================================================= */
+
+.row {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    68px
+    1fr
+    auto;
+
+  align-items: center;
+
+  min-height: 68px;
+
+  padding:
+    0
+    20px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.055);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.028),
+      rgba(255,255,255,0.008)
+    );
+
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0 calc(100% - 8px),
+    0 8px
+  );
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+/* left energy accent */
+
+.row::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+
+  width: 2px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(141,92,255,0.6),
+      transparent
+    );
+
+  opacity: 0;
+
+  transition: opacity 0.25s ease;
+}
+
+
+.row:hover {
+  transform: translateX(7px);
+
+  border-color:
+    rgba(141,92,255,0.22);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(141,92,255,0.09),
+      rgba(255,255,255,0.018)
+    );
+}
+
+.row:hover::before {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   ROW RANK
+   ========================================================= */
+
+.row-rank {
+  font-family: var(--display);
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  color: var(--purple-light);
+}
+
+.row-rank::before {
+  content: "#";
+
+  color: var(--faint);
+
+  margin-right: 2px;
+}
+
+
+/* =========================================================
+   ROW NAME
+   ========================================================= */
+
+.row-name {
+  min-width: 0;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.row.is-vacant .row-name {
+  color: var(--faint);
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   ROW STATUS
+   ========================================================= */
+
+.row-status {
+  font-family: var(--display);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+
+  color: var(--faint);
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.state-loading {
+  padding:
+    12px
+    8px
+    8px;
+}
+
+.skeleton-podium {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1.15fr
+    1fr;
+
+  align-items: end;
+
+  gap: 16px;
+
+  min-height: 350px;
+
+  padding:
+    28px
+    12px
+    34px;
+}
+
+.skeleton-card {
+  min-height: 245px;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255,255,255,0.025) 30%,
+      rgba(141,92,255,0.08) 50%,
+      rgba(255,255,255,0.025) 70%
+    );
+
+  background-size: 200% 100%;
+
+  animation:
+    shimmer 1.7s linear infinite;
+
+  border-radius: 14px;
+}
+
+.skeleton-card.large {
+  min-height: 315px;
+}
+
+.skeleton-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.skeleton-row {
+  height: 68px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255,255,255,0.02) 30%,
+      rgba(141,92,255,0.06) 50%,
+      rgba(255,255,255,0.02) 70%
+    );
+
+  background-size: 200% 100%;
+
+  animation:
+    shimmer 1.7s linear infinite;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.state-error {
+  padding: 90px 20px;
+
+  text-align: center;
+}
+
+.error-title {
+  margin: 0;
+
+  font-family: var(--display);
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+}
+
+.error-detail {
+  margin:
+    10px
+    0
+    25px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.retry-btn {
+  padding:
+    12px
+    22px;
+
+  border:
+    1px solid
+    rgba(141,92,255,0.38);
+
+  border-radius: 8px;
+
+  background:
+    rgba(141,92,255,0.10);
+
+  color: var(--purple-light);
+
+  font-family: var(--body);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(141,92,255,0.17);
+
+  border-color:
+    rgba(141,92,255,0.58);
+}
+
+
+/* =========================================================
+   LIVE / META
+   ========================================================= */
+
+.meta {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  margin-top: 23px;
+
+  color: var(--faint);
+
+  font-family: var(--display);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.meta-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--purple);
+
+  box-shadow:
+    0 0 12px rgba(141,92,255,0.8);
+
+  animation:
+    livePulse 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes moonFloat {
+  0%,
+  100% {
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translateX(-50%)
+      scale(1.05);
+  }
+}
+
+@keyframes energyLine {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .page {
+    width: min(
+      100% - 24px,
+      980px
+    );
+
+    padding-top: 60px;
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
+
+  .board {
+    padding: 18px;
+  }
+
+  .podium {
+    gap: 9px;
+
+    padding:
+      20px
+      4px
+      25px;
+  }
+
+  .podium-card {
+    min-height: 210px;
+
+    padding:
+      20px
+      10px;
+  }
+
+  .podium-card.rank-1 {
+    min-height: 270px;
+  }
+
+  .podium-name {
+    font-size: 18px;
+  }
+
+  .rank-1 .podium-name {
+    font-size: 23px;
+  }
+
+  .podium-rank {
+    font-size: 10px;
+  }
+
+  .row {
+    min-height: 62px;
+
+    grid-template-columns:
+      50px
+      1fr
+      auto;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .page {
+    width: calc(100% - 14px);
+
+    padding-top: 42px;
+    padding-bottom: 35px;
+  }
+
+  .emblem {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 48px;
+
+    letter-spacing: 0.09em;
+  }
+
+  .subtitle {
+    margin-top: 18px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.30em;
+  }
+
+  .board {
+    padding: 10px;
+
+    clip-path: none;
+
+    border-radius: 16px;
+  }
+
+  .podium {
+    gap: 5px;
+
+    min-height: 225px;
+
+    padding:
+      13px
+      1px
+      19px;
+  }
+
+  .podium-card {
+    min-height: 170px;
+
+    padding:
+      15px
+      5px;
+
+    clip-path: none;
+
+    border-radius: 10px;
+  }
+
+  .podium-card.rank-1 {
+    min-height: 215px;
+
+    transform: translateY(-9px);
+  }
+
+  .podium-card.rank-1:hover {
+    transform: translateY(-13px);
+  }
+
+  .podium-rank {
+    margin-bottom: 11px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.16em;
+  }
+
+  .podium-name {
+    font-size: 13px;
+  }
+
+  .rank-1 .podium-name {
+    font-size: 17px;
+  }
+
+  .row {
+    min-height: 57px;
+
+    padding:
+      0
+      12px;
+
+    grid-template-columns:
+      40px
+      1fr;
+  }
+
+  .row-rank {
+    font-size: 14px;
+  }
+
+  .row-name {
+    font-size: 12px;
+  }
+
+  .row-status {
+    display: none;
+  }
+
+  .skeleton-podium {
+    gap: 5px;
+
+    min-height: 225px;
+
+    padding:
+      13px
+      1px
+      19px;
+  }
+
+  .skeleton-card {
+    min-height: 170px;
+  }
+
+  .skeleton-card.large {
+    min-height: 215px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .title {
+    font-size: 40px;
+  }
+
+  .subtitle {
+    font-size: 8px;
+  }
+
+  .podium-name {
+    font-size: 11px;
+  }
+
+  .rank-1 .podium-name {
+    font-size: 15px;
+  }
+
+  .podium-rank {
+    font-size: 7px;
+  }
+}
